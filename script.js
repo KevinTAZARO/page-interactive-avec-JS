@@ -54,7 +54,6 @@ header.addEventListener('dblclick', function(){
 
 //FONCTIONNALITÉ 6
 let buttons = document.querySelectorAll('button.btn-success');
-console.log(button);
 
 buttons.forEach(button =>{
     button.addEventListener('mouseover',function(){
@@ -72,3 +71,90 @@ buttons.forEach(button =>{
 });
 
 //FONCTIONNALITÉ 7
+let arrowRight = document.querySelector('a.btn-secondary');
+
+arrowRight.addEventListener('click', function(){
+    let parent = document.querySelectorAll('div.row')[1];
+    let firstChild = parent.firstElementChild;
+    let lastChild = parent.lastElementChild;
+
+    parent.insertBefore(lastChild, firstChild);
+});
+
+//FONCTIONNALITÉ 8
+let arrowLeft = document.querySelector('a.btn-primary');
+
+arrowLeft.addEventListener('click', function(e){
+    e.preventDefault();
+    
+    let parent = document.querySelectorAll('div.row')[1];
+    let firstChild = parent.firstElementChild;
+    let lastChild = parent.lastElementChild;
+
+    parent.insertBefore(firstChild,lastChild.nextSibling);
+});
+
+//FONCTIONNALITÉ 9
+let row = document.querySelectorAll('div.row')[1];
+let col = document.querySelectorAll('div.col-md-4');
+
+window.addEventListener('keypress', function(e){
+    if(document.getSelection().anchorNode.textContent === 'JS & Events' && window.getSelection().focusOffset === 0){
+        if(e.key === "a"){
+            row.setAttribute('class', '');
+            row.classList.add('row');
+            row.classList.add('justify-content-left');
+
+            for(let i=0; i<col.length; i++){
+                col[i].setAttribute('class', '');
+                col[i].classList.add('col-md-3');
+            };
+        }else if(e.key === "y"){
+            row.setAttribute('class', '');
+            row.classList.add('row');
+            row.classList.add('justify-content-center');
+
+            for(let i=0; i<col.length; i++){
+                col[i].setAttribute('class', '');
+                col[i].classList.add('col-md-3');
+            };
+        }else if(e.key === "p"){
+            row.setAttribute('class', '');
+            row.classList.add('row');
+            row.classList.add('justify-content-end');
+
+            for(let i=0; i<col.length; i++){
+                col[i].setAttribute('class', '');
+                col[i].classList.add('col-md-3');
+            };
+        } else if (e.key === "b"){
+            row.setAttribute("class", "");
+            row.classList.add("row");
+    
+            for (let i=0; i < col.length; i++){
+              col[i].setAttribute("class", "");
+              col[i].classList.add("col-md-4");
+            };
+        };
+    };           
+});
+
+
+
+
+// Fonctionnalité Konami Code 🤫
+let pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let current = 0;
+
+document.addEventListener('keydown', function keyHandler(event){
+  if (pattern.indexOf(event.key) < 0 || event.key !== pattern[current]) {
+		current = 0;
+		return;
+	}
+  current++;
+  if (pattern.length === current) {
+		current = 0;
+		window.alert('Congratulations! You Found an Easter Egg!');
+    window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+	}
+}, false);
